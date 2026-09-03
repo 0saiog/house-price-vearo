@@ -1,0 +1,27 @@
+[package]
+name = "backend"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "FastAPI-style inference service for the house price model, in axum."
+
+[dependencies]
+vearo.workspace = true
+hp-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+axum = "0.8.9"
+tokio = { version = "1.53.1", features = ["rt-multi-thread", "macros", "signal"] }
+tower-http = { version = "0.7.1", features = ["cors", "trace"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+dotenvy = "0.15.7"
+anyhow = "1.0.104"
+thiserror = "2.0.20"
+
+[dev-dependencies]
+http-body-util = "0.1.5"
+tower = { version = "0.5.3", features = ["util"] }
+
+[features]
+cuda = ["vearo/cuda", "hp-core/cuda"]

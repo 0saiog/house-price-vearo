@@ -1,0 +1,21 @@
+[workspace]
+resolver = "3"
+members = ["core", "ml", "backend"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "AGPL-3.0-or-later"
+
+[workspace.dependencies]
+# The whole ML stack. No PyTorch, no scikit-learn - the tensor library, the
+# autograd engine and the optimizers all come from here.
+vearo = { git = "https://github.com/razecrs/vearo", rev = "af6d2bcb5b80d5301f92a5f970245d388def7a59" }
+hp-core = { path = "core" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1

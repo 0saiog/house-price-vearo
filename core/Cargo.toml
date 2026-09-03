@@ -1,0 +1,17 @@
+[package]
+name = "hp-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Shared house-price domain code: column parsers, the feature spec, and the Vearo model."
+
+[dependencies]
+vearo.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror = "2.0.20"
+
+[features]
+# Compiles Vearo's CUDA backend in. Needs a CUDA toolkit that cudarc accepts
+# (12.5 or older); see the README.
+cuda = ["vearo/cuda"]

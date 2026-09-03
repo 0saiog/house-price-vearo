@@ -1,0 +1,14 @@
+.git
+.github
+.venv
+target
+ml/data
+frontend/node_modules
+frontend/dist
+backend/.env
+frontend/.env
+reports
+docs
+House_Price_Prediction_Project_Guide.pdf
+sais_ai_project.md
+*.log

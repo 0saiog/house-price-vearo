@@ -1,0 +1,34 @@
+[package]
+name = "ml"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "House price pipeline: load, clean, EDA, train on Vearo, export."
+
+[[bin]]
+name = "train"
+path = "src/main.rs"
+
+[dependencies]
+vearo.workspace = true
+hp-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+csv = "1.4.0"
+# SVG only, with a bundled font so charts render text without a system
+# font provider. The default feature set drags in bitmap backends we never use.
+plotters = { version = "0.3.7", default-features = false, features = [
+    "svg_backend",
+    "all_series",
+    "boxplot",
+    "histogram",
+    "ab_glyph",
+] }
+clap = { version = "4.6.6", features = ["derive"] }
+anyhow = "1.0.104"
+indicatif = "0.18.6"
+rayon = "1.12.0"
+tempfile = "3.23.0"
+
+[features]
+cuda = ["vearo/cuda", "hp-core/cuda"]

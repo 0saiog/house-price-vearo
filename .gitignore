@@ -1,0 +1,36 @@
+# Rust
+/target/
+**/*.rs.bk
+
+# The dataset. 102 MB, and Kaggle's to distribute, not ours - the README says
+# how to fetch it in one command.
+ml/data/
+*.csv
+
+# Node
+node_modules/
+frontend/dist/
+frontend/*.local
+
+# Secrets and local settings. Only the .example files are committed.
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Python virtualenv left over from the original project scaffold. This project
+# has no Python in it.
+.venv/
+__pycache__/
+
+# Logs and editor noise
+*.log
+.DS_Store
+.idea/
+.vscode/
+
+# The assignment brief. Kept locally, not republished here - it is the course's
+# document, not this project's work. The README covers everything needed to run
+# and understand the project.
+House_Price_Prediction_Project_Guide.pdf
+sais_ai_project.md
