@@ -189,6 +189,7 @@ curl -L -o /tmp/house-price.zip \
   "https://www.kaggle.com/api/v1/datasets/download/juhibhojani/house-price"
 unzip -o /tmp/house-price.zip -d ml/data
 ```
+Due to Windows command-line handling with ``curl``, it's necessary to download the dataset downloader from the assets
 
 From [kaggle.com/datasets/juhibhojani/house-price](https://www.kaggle.com/datasets/juhibhojani/house-price).
 It's 102 MB so it's gitignored.
