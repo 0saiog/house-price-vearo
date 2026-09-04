@@ -4,6 +4,11 @@ Guesses what a flat or house in India is worth from its city, floor area, layout
 It's trained on a Kaggle dataset of 187k listings, there's a JSON API on top, and a React form
 to poke at it.
 
+There's a sibling repo, [`house-price-app`](https://github.com/0saiog/house-price-python), that does
+the same thing in Python.
+using [Vearo](https://github.com/razecrs/vearo) for the model. The two agree on the data down to the row,
+see [Cross-check](#cross-check).
+
 The brief asked for pandas, scikit-learn, a Jupyter notebook and FastAPI. I did it in Rust
 instead. The model is trained with [Vearo](https://github.com/razecrs/vearo), a Rust deep
 learning framework, which does the job scikit-learn would have (tensors, autograd, AdamW). The
@@ -122,6 +127,27 @@ So `core/src/clean.rs` pulls out the bedroom count, the property type (flat, vil
 builder floor, studio and so on) and the locality, by taking the part after "for sale in" and
 stripping off the society name and the city. That plus the society column is where most of the
 recent accuracy came from.
+
+## Cross-check
+
+The same cleaning rules are implemented independently in Python here and in Rust in the sibling
+repository. They agree exactly:
+
+| step | Python | Rust |
+|---|---|---|
+| raw rows | 187,531 | 187,531 |
+| no usable price | −9,684 | −9,684 |
+| no usable area | −90 | −90 |
+| duplicate listings | −113,886 | −113,886 |
+| price-per-sqft outliers | −1,225 | −1,225 |
+| **kept** | **62,646** | **62,646** |
+
+Two separate implementations landing on the same five numbers from 187,531 messy rows is a much
+better check on the parsers than either one's unit tests.
+
+Model scores differ slightly because the two split the data with different random number generators,
+and because the estimators differ. Notably the Vearo MLP (17.9% MdAPE, R² 0.831) beats
+scikit-learn's `MLPRegressor` here (19.5%, 0.744) and matches this project's gradient boosting on R².
 
 ## Architecture
 
